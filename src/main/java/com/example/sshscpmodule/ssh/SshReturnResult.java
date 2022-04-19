@@ -46,7 +46,7 @@ public class SshReturnResult {
             System.out.println("==> Connected to" + host);
 
             channelExec.setPty(true);
-            channelExec.setCommand("ls -al ~/workspace");
+            channelExec.setCommand("cd ~/workspace/user/sue; mkdir zzz; ls -al;");
 
             //콜백을 받을 준비
             StringBuilder outputBuffer = new StringBuilder();
