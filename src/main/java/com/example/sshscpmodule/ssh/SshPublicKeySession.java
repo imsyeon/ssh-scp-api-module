@@ -1,12 +1,11 @@
 package com.example.sshscpmodule.ssh;
 
 import com.jcraft.jsch.*;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class SSHTest {
+public class SshPublicKeySession {
     @GetMapping("/sshTest")
     public static String sshTest() throws Exception{
         String username = "ubuntu";
