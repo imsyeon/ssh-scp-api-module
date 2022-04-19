@@ -8,38 +8,38 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SSHTest {
     @GetMapping("/sshTest")
-    public static void sshTest() throws Exception{
+    public static String sshTest() throws Exception{
         String username = "ubuntu";
-        String host = "3.34.3.22";
+        String host = "52.79.103.245";
         int port = 22;
-        String password = "PaaS-TA@2022";
+        String privateKeyPath = "/Users/imsooyeon/Desktop/workspace/key/aws2-paasta-c3-sue-key.pem";
 
         System.out.println("==> Connecting to" + host);
         Session session = null;
         Channel channel = null;
 
-        // 2. 세션 객체를 생성한다 (사용자 이름, 접속할 호스트, 포트를 인자로 준다.)
+        // 세션 객체 생성 (사용자 이름, 접속할 호스트, 포트를 인자로 준다.)
         try {
-            // 1. JSch 객체를 생성한다.
+            // JSch 객체 생성
             JSch jsch = new JSch();
+
+            // key 설정
+            jsch.addIdentity(privateKeyPath);
             session = jsch.getSession(username, host, port);
 
-            // 3. 패스워드를 설정한다.
-            session.setPassword(password);
-
-            // 4. 세션과 관련된 정보를 설정한다.
+            // 세션과 관련된 정보를 설정
             java.util.Properties config = new java.util.Properties();
-            // 4-1. 호스트 정보를 검사하지 않는다.
+            // 호스트 정보를 검사하지 않음
             config.put("StrictHostKeyChecking", "no");
             session.setConfig(config);
 
-            // 5. 접속한다.
+            // 접속
             session.connect();
 
-            // 6. sftp 채널을 연다.
+            // sftp 채널 열기
             channel = session.openChannel("exec");
 
-            // 8. 채널을 SSH용 채널 객체로 캐스팅한다
+            // 채널을 SSH용 채널 객체로 캐스팅
             ChannelExec channelExec = (ChannelExec) channel;
 
             System.out.println("==> Connected to" + host);
@@ -60,7 +60,7 @@ public class SSHTest {
             }
         }
 
-
+return "ok";
     }
 
 
