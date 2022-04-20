@@ -9,7 +9,7 @@ import java.io.InputStream;
 @RestController
 public class SshReturnResult {
     @GetMapping("/sshTest02")
-    public static String sshTest() throws Exception{
+    public String sshTest() throws Exception{
         String username = "ubuntu";
         String host = "52.79.103.245";
         int port = 22;

@@ -9,7 +9,7 @@ import java.io.InputStream;
 @RestController
 public class SshResponse {
     @GetMapping("/sshTest03")
-    public static String sshTest() throws Exception {
+    public String sshTest() throws Exception {
         String username = "ubuntu";
         String host = "52.79.103.245";
         int port = 22;
@@ -47,7 +47,7 @@ public class SshResponse {
             System.out.println("==> Connected to" + host);
 
             channelExec.setPty(true);
-        channelExec.setCommand("ls -al ~/workspace");
+            channelExec.setCommand("ls -al ~/workspace");
 
             InputStream inputStream = channelExec.getInputStream();
             channelExec.connect();
