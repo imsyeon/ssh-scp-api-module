@@ -37,11 +37,11 @@ public class SshResponseTest {
         session.connect();
     }
 
-    @GetMapping("/sshTest04")
-    public String sshTest() throws Exception {
+    @GetMapping("/sshTest01")
+    public String sshTest01() throws Exception {
 
         try {
-
+            System.out.println("sshTest01");
             connectSSH();
             // sftp 채널 열기
             channel = session.openChannel("exec");
@@ -50,7 +50,7 @@ public class SshResponseTest {
             ChannelExec channelExec = (ChannelExec) channel;
 
             channelExec.setPty(true);
-            channelExec.setCommand("ps -ef; netstat -anlp | grep LIST; ls -al /home/ubuntu/; cat .profile;");
+            channelExec.setCommand("ps -ef;");
 
             InputStream inputStream = channelExec.getInputStream();
             channelExec.connect();
@@ -67,16 +67,94 @@ public class SshResponseTest {
         } finally {
 
             disConnectSSH();
+            sshTest02();
         }
 
         return response.toString();
+
+    }
+    public String sshTest02() throws Exception {
+
+        try {
+
+            System.out.println("sshTest02");
+            // sftp 채널 열기
+            channel = session.openChannel("exec");
+
+            // 채널을 SSH용 채널 객체로 캐스팅
+            ChannelExec channelExec = (ChannelExec) channel;
+
+            channelExec.setPty(true);
+            channelExec.setCommand("netstat -anlp | grep LIST;");
+
+            InputStream inputStream = channelExec.getInputStream();
+            channelExec.connect();
+
+            byte[] buffer = new byte[8192];
+            int decodedLength;
+            response = new StringBuilder();
+            while ((decodedLength = inputStream.read(buffer, 0, buffer.length)) > 0)
+                response.append(new String(buffer, 0, decodedLength));
+            System.out.println(response.toString());
+
+        } catch (JSchException e) {
+            e.printStackTrace();
+        } finally {
+
+            disConnectSSH();
+            sshTest03();
+
+        }
+
+        return response.toString();
+
+    }
+
+    public String sshTest03() throws Exception {
+
+        try {
+
+            System.out.println("sshTest03");
+            // sftp 채널 열기
+            channel = session.openChannel("exec");
+
+            // 채널을 SSH용 채널 객체로 캐스팅
+            ChannelExec channelExec = (ChannelExec) channel;
+
+            channelExec.setPty(true);
+            channelExec.setCommand("ls -al /home/ubuntu/;");
+
+            InputStream inputStream = channelExec.getInputStream();
+            channelExec.connect();
+
+            byte[] buffer = new byte[8192];
+            int decodedLength;
+            response = new StringBuilder();
+            while ((decodedLength = inputStream.read(buffer, 0, buffer.length)) > 0)
+                response.append(new String(buffer, 0, decodedLength));
+            System.out.println(response.toString());
+
+        } catch (JSchException e) {
+            e.printStackTrace();
+        } finally {
+
+            disConnectSSHSession();
+
+        }
+
+        return response.toString();
+
     }
 
     private void disConnectSSH() {
+        if (channel != null) channel.disconnect();
+        System.out.println("close");
+
+    }
+    private void disConnectSSHSession() {
         if (channel != null) channel.disconnect();
         if (session != null) session.disconnect();
         System.out.println("close");
 
     }
-
 }

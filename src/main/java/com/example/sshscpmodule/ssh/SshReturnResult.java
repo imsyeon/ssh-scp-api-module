@@ -8,7 +8,7 @@ import java.io.InputStream;
 
 @RestController
 public class SshReturnResult {
-    @GetMapping("/sshTest02")
+    @GetMapping("/sshReturn")
     public String sshTest() throws Exception{
         String username = "ubuntu";
         String host = "52.79.103.245";
