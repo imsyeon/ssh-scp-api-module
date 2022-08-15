@@ -15,9 +15,9 @@ public class SshResponseTest {
 
     private void connectSSH() throws JSchException{
         String username = "ubuntu";
-        String host = "52.79.103.245";
+        String host = "IP";
         int port = 22;
-        String privateKeyPath = "/Users/imsooyeon/Desktop/workspace/key/aws2-paasta-c3-sue-key.pem";
+        String privateKeyPath = "KEY_PATH";
 
         System.out.println("==> Connecting to" + host);
 

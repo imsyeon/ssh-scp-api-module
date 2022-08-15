@@ -8,12 +8,12 @@ import java.io.InputStream;
 
 @RestController
 public class SshResponse {
-    @GetMapping("/sshTest03")
-    public String sshTest() throws Exception {
+    @GetMapping("/sshResponse")
+    public String sshResponse() throws Exception {
         String username = "ubuntu";
-        String host = "52.79.103.245";
+        String host = "IP";
         int port = 22;
-        String privateKeyPath = "/Users/imsooyeon/Desktop/workspace/key/aws2-paasta-c3-sue-key.pem";
+        String privateKeyPath = "KEY_PATH";
 
         System.out.println("==> Connecting to" + host);
         Session session = null;

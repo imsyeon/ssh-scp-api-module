@@ -12,13 +12,13 @@ import java.io.InputStream;
 @RestController
 public class ScpFileDownload {
 
-    @GetMapping("/scpTest")
+    @GetMapping("/files")
     public void scpDownload() throws Exception {
 
         String username = "ubuntu";
-        String host = "52.79.103.245";
+        String host = "IP";
         int port = 22;
-        String privateKeyPath = "/Users/imsooyeon/Desktop/workspace/key/aws2-paasta-c3-sue-key.pem";
+        String privateKeyPath = "KEY_PATH";
 
         System.out.println("==> Connecting to" + host);
 
@@ -53,7 +53,7 @@ public class ScpFileDownload {
         }
         try {
 
-            outputStream = new FileOutputStream(new File("/Users/imsooyeon/Desktop/workspace/jspring-music01.war"));
+            outputStream = new FileOutputStream(new File("/Users/imsooyeon/Desktop/workspace/spring-music.war"));
             int i;
             while ((i = inputStream.read()) != -1) {
                 outputStream.write(i);

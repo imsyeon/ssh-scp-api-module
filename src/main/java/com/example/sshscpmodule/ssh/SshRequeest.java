@@ -5,13 +5,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class SshPublicKeySession {
-    @GetMapping("/sshTest")
-    public static String sshTest() throws Exception{
+public class SshRequeest {
+    @GetMapping("/sshRequeest")
+    public static String sshRequeest() throws Exception {
         String username = "ubuntu";
-        String host = "52.79.103.245";
+        String host = "IP";
         int port = 22;
-        String privateKeyPath = "/Users/imsooyeon/Desktop/workspace/key/aws2-paasta-c3-sue-key.pem";
+        String privateKeyPath = "KEY_PATH";
 
         System.out.println("==> Connecting to" + host);
         Session session = null;
@@ -59,7 +59,7 @@ public class SshPublicKeySession {
             }
         }
 
-return "ok";
+        return "ok";
     }
 
 
