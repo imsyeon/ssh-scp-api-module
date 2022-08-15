@@ -8,5 +8,5 @@
 
 ### description
 
-- SSH
-- SCP
+- java scp를 통하여 원격 서버 파일 다운로드
+- java ssh로 원격 서버 접속 및 명령어 전송
